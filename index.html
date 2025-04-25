@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Student Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            display: none;
+            flex: 1;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 25%;
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .sidebar a:hover {
+            background: #495057;
+        }
+        .sub-menu {
+            display: none;
+            padding-left: 20px;
+        }
+        .content {
+            width: 75%;
+            padding: 20px;
+        }
+        .footer {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .login-container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Student Portal</div>
+    <div class="login-container" id="login">
+        <img src="https://logodix.com/logo/871256.png" width="140" height="70" alt="Logo" class="logo">
+        <h2>Student Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+    <div class="container" id="portal">
+        <div class="main-content">
+            <div class="sidebar">
+                <a onclick="showSection('home')">Home</a>
+                <a onclick="toggleSubMenu('personal')">Personal</a>
+                <div id="personal" class="sub-menu">
+                    <a onclick="showSection('profile')">Profile</a>
+                    <a onclick="showSection('attendance')">Attendance</a>
+                    <a onclick="showSection('internal')">Internal</a>
+                    <a onclick="showSection('external')">External</a>
+                    <a onclick="showSection('fee-details')">Fee Details</a>
+                    <a onclick="showSection('profiles-report')">Overall Profiles Report</a>
+                </div>
+                <a onclick="toggleSubMenu('participative')">Participative</a>
+                <div id="participative" class="sub-menu">
+                    <a onclick="showSection('internal-training')">Internal Training Attended</a>
+                    <a onclick="showSection('courses-completed')">Courses Completed</a>
+                    <a onclick="showSection('extracurricular')">Extra Curricular Participation</a>
+                    <a onclick="showSection('recognitions')">Recognitions Received</a>
+                    <a onclick="showSection('publications')">Publication Details</a>
+                </div>
+                <a onclick="toggleSubMenu('coding')">Coding</a>
+                <div id="coding" class="sub-menu">
+                    <a onclick="showSection('programming-languages')">Programming Languages</a>
+                    <a onclick="showSection('coding-competitions')">Coding Competitions</a>
+                    <a onclick="showSection('certifications')">Certifications</a>
+                    <a onclick="showSection('projects')">Projects</a>
+                </div>
+                <a onclick="toggleSubMenu('internship')">Internship</a>
+                <div id="internship" class="sub-menu">
+                    <a onclick="showSection('internship-details')">Company Details</a>
+                    <a onclick="showSection('internship-duration')">Duration</a>
+                    <a onclick="showSection('internship-skills')">Skills Gained</a>
+                </div>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+            <div class="content">
+                <div id="home" class="section">
+                    <h2>Welcome to the Student Portal</h2>
+                    <h3>DASHBOARD:</h3>
+                    <p>Welcome to your Dashboard! Here, you can find a personalized overview of your academic journey. Access your upcoming assignments, track your grades, and stay updated on important announcements. This is your central hub for managing your studies and ensuring you never miss a deadline.</p>
+                </div>
+
+                <!-- Personal Sections -->
+                <div id="profile" class="section" style="display: none;">
+                    <h2>Profile</h2>
+                    <p>Here is your student profile containing essential information such as your name, student ID, and academic details.</p>
+                    <p><strong>Name:</strong> B.Bhanu Prasad</p>
+                    <p><strong>Student ID:</strong> 231FA04706</p>
+                    <p><strong>Department:</strong> Computer Science</p>
+                </div>
+
+                <div id="attendance" class="section" style="display: none;">
+                    <h2>Attendance</h2>
+                    <p>Your attendance record for the current semester is displayed here. You can track your attendance percentage and any missed classes.</p>
+                    <p><strong>Present:</strong> 45/50</p>
+                    <p><strong>Percentage:</strong> 90%</p>
+                </div>
+
+                <div id="internal" class="section" style="display: none;">
+                    <h2>Internal Assessments</h2>
+                    <p>This section shows your internal assessment scores for various subjects. Keep track of your performance in internal exams and assignments.</p>
+                    <p><strong>Subject 1:</strong> "Data Structures" - Grade: A</p>
+                    <p><strong>Subject 2:</strong> "Web Development" - Grade: B+</p>
+                </div>
+
+                <div id="external" class="section" style="display: none;">
+                    <h2>External Exams</h2>
+                    <p>This section displays your results from external exams such as midterms, finals, and competitive exams.</p>
+                    <p><strong>External Exam 1:</strong> "Mathematics Final" - Score: 80/100</p>
+                    <p><strong>External Exam 2:</strong> "Programming Final" - Score: 85/100</p>
+                </div>
+
+                <div id="fee-details" class="section" style="display: none;">
+                    <h2>Fee Details</h2>
+                    <p>Here, you can check the fees for your courses, including due dates and payment status.</p>
+                    <p><strong>Amount Due:</strong> $500</p>
+                    <p><strong>Due Date:</strong> March 15, 2025</p>
+                </div>
+
+                <div id="profiles-report" class="section" style="display: none;">
+                    <h2>Overall Profiles Report</h2>
+                    <p>This report summarizes your academic performance, participation, and accomplishments over the semester.</p>
+                    <p><strong>GPA:</strong> 3.8</p>
+                    <p><strong>Achievements:</strong> Best Performer in Web Development</p>
+                </div>
+
+                <!-- Participative Sections -->
+                <div id="internal-training" class="section" style="display: none;">
+                    <h2>Internal Training Attended</h2>
+                    <p>This section lists the internal training programs you've attended during your academic journey.</p>
+                    <p><strong>Training Program 1:</strong> "Introduction to Machine Learning" - March 2024</p>
+                    <p><strong>Training Program 2:</strong> "Web Development with React" - July 2024</p>
+                </div>
+
+                <div id="courses-completed" class="section" style="display: none;">
+                    <h2>Courses Completed</h2>
+                    <p>This section displays the courses you have completed successfully.</p>
+                    <p><strong>Course 1:</strong> "Data Structures" - Grade: A</p>
+                    <p><strong>Course 2:</strong> "Advanced JavaScript" - Grade: B+</p>
+                </div>
+
+                <div id="extracurricular" class="section" style="display: none;">
+                    <h2>Extra-Curricular Participation</h2>
+                    <p>Track your participation in clubs, sports, and student organizations.</p>
+                    <p><strong>Sports:</strong> Basketball (Captain)</p>
+                    <p><strong>Club Participation:</strong> Coding Club (Member)</p>
+                </div>
+
+                <div id="recognitions" class="section" style="display: none;">
+                    <h2>Recognitions Received</h2>
+                    <p>Display awards, recognitions, and scholarships you have received.</p>
+                    <p><strong>Recognition 1:</strong> "Best Project Award" - June 2024</p>
+                    <p><strong>Recognition 2:</strong> "Excellence in Coding" - September 2024</p>
+                </div>
+
+                <div id="publications" class="section" style="display: none;">
+                    <h2>Publication Details</h2>
+                    <p>Show your academic and research publications here.</p>
+                    <p><strong>Research Paper:</strong> "AI in Healthcare" - Published in International Journal of AI</p>
+                </div>
+
+                <!-- Coding Sections -->
+                <div id="programming-languages" class="section" style="display: none;">
+                    <h2>Programming Languages</h2>
+                    <p>List the programming languages you have mastered and your proficiency in each of them.</p>
+                    <p><strong>Languages Known:</strong> Python, JavaScript, C++, Java</p>
+                </div>
+
+                <div id="coding-competitions" class="section" style="display: none;">
+                    <h2>Coding Competitions</h2>
+                    <p>Show your ranking and achievements in coding competitions.</p>
+                    <p><strong>Competition 1:</strong> First Place - "National Coding Contest 2024"</p>
+                </div>
+
+                <div id="certifications" class="section" style="display: none;">
+                    <h2>Certifications</h2>
+                    <p>Display any relevant certifications you have earned, such as online courses or professional certifications.</p>
+                    <p><strong>Certification 1:</strong> "Certified Python Developer" - Coursera</p>
+                </div>
+
+                <div id="projects" class="section" style="display: none;">
+                    <h2>Projects</h2>
+                    <p>Showcase the projects you have worked on throughout your academic journey.</p>
+                    <p><strong>Project 1:</strong> "Personal Finance Management App"</p>
+                </div>
+
+                <!-- Internship Sections -->
+                <div id="internship-details" class="section" style="display: none;">
+                    <h2>Internship Details</h2>
+                    <p>Details about the internships you have completed or are currently pursuing.</p>
+                    <p><strong>Company:</strong> ABC Technologies</p>
+                    <p><strong>Position:</strong> Software Development Intern</p>
+                </div>
+
+                <div id="internship-duration" class="section" style="display: none;">
+                    <h2>Internship Duration</h2>
+                    <p>Information about the start and end dates of your internships.</p>
+                    <p><strong>Internship 1:</strong> June 2024 - September 2024</p>
+                </div>
+
+                <div id="internship-skills" class="section" style="display: none;">
+                    <h2>Skills Gained</h2>
+                    <p>The skills and tools you have learned during your internships.</p>
+                    <p><strong>Skills:</strong> Java, SQL, Git, Agile Methodology</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">&copy; 2025 Student Portal All Rights Reserved | Contact: student@portal.com</div>
+
+    <script>
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username === 'student' && password === 'password123') {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('portal').style.display = 'flex';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        }
+
+        function logout() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('portal').style.display = 'none';
+        }
+
+        function toggleSubMenu(id) {
+            var submenu = document.getElementById(id);
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                submenu.style.display = 'block';
+            }
+        }
+
+        function showSection(id) {
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
